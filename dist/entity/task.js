@@ -36,7 +36,7 @@ __decorate([
     __metadata("design:type", String)
 ], Task.prototype, "attachment", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: false }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", Boolean)
 ], Task.prototype, "completed", void 0);
 __decorate([

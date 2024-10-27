@@ -109,7 +109,7 @@ class TaskController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const taskId = parseInt(req.params.id);
-                const { title, description, dueDate, completed } = req.body;
+                const { title, description, dueDate } = req.body;
                 // Validate required fields
                 if (!title || !description || !dueDate) {
                     res.status(400).json({ msg: "Fields are incomplete" });
@@ -137,7 +137,7 @@ class TaskController {
                 task.dueDate = new Date(dueDate); // Ensure dueDate is a Date object
                 task.attachment = attachmentPath;
                 task.user = user; // Link the task to the authenticated user
-                task.completed = completed;
+                task.completed = req.body.completed ? JSON.parse(req.body.completed) : task.completed;
                 // Save the updated task
                 yield taskRepo.save(task);
                 // Send response

@@ -109,7 +109,7 @@ export class TaskController {
   static async editTask(req: AuthenticatedRequest, res: Response) {
     try {
       const taskId = parseInt(req.params.id); 
-      const { title, description, dueDate, completed } = req.body;
+      const { title, description, dueDate } = req.body;
 
       // Validate required fields
       if (!title || !description || !dueDate) {
@@ -141,9 +141,10 @@ export class TaskController {
       task.title = title;
       task.description = description;
       task.dueDate = new Date(dueDate); // Ensure dueDate is a Date object
-      task.attachment = attachmentPath;
+      task.attachment = attachmentPath || task.attachment;
       task.user = user; // Link the task to the authenticated user
-      task.completed=completed;
+      task.completed=req.body.completed ? JSON.parse(req.body.completed) : task.completed;
+
 
       // Save the updated task
       await taskRepo.save(task);

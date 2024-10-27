@@ -25,7 +25,7 @@ import {
     @Column({ type: "varchar", length: 255, nullable: true })
     attachment?: string;
   
-    @Column({ default: false })
+    @Column()
     completed: boolean;
   
     @CreateDateColumn()
